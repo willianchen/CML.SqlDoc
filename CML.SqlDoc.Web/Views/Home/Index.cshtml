@@ -1,0 +1,90 @@
+﻿
+@using CML.SqlDoc.Domain;
+
+@{
+    Layout = null;
+
+}
+@model List<DataBaseConfig>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>数据库表结构文档查看器</title>
+    <meta name="renderer" content="webkit">
+    <meta charset="utf-8">
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/css/font.css" rel="stylesheet" />
+    <link href="~/css/xadmin.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo"><a href="/">数据库表结构文档查看器</a></div>
+
+        <div class="left_open">
+            <i title="展开左侧栏" class="iconfont">&#xe699;</i>
+        </div>
+    </div>
+    <div class="left-nav">
+        <div id="side-nav">
+            <ul id="nav">
+                <li class="open">
+                    <a href="javascript:;">
+                        <i class="iconfont layui-icon"></i>
+                        <cite>数据库连接</cite>
+                        <i class="iconfont nav_right">&#xe6a6;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        @if (Model != null && Model.Any())
+                        {
+                            int index = 0;
+                            foreach (var item in Model)
+                            {
+                                <li>
+                                    <a _href="/DataBase/index/@item.Id">
+                                        <i class="iconfont">&#xe6a7;</i>
+                                        <cite>@item.Title [@item.DbType]</cite>
+                                    </a>
+                                </li>
+
+                                index++;
+                            }
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- <div class="x-slide_left"></div> -->
+    <!-- 左侧菜单结束 -->
+    <!-- 右侧主体开始 -->
+    <div class="page-content">
+        <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+            <ul class="layui-tab-title">
+                <li>首页</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <iframe src='/Home/Welcome' frameborder="0" style="width:100%;height:95%;" data-id="/DataBase/" scrolling="yes" class="x-iframe"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-content-bg"></div>
+    <!-- 右侧主体结束 -->
+    @*<div class="layui-body">
+            <iframe class="J_iframe" name="iframe0" style="width:100%;height:95%;" src="" frameborder="0" data-id="/DataBase/"></iframe>
+        </div>*@
+
+    <div class="footer">
+        <!-- 底部固定区域 -->
+        © 数据库表结构文档查看器版权  2018
+    </div>
+    <script src="~/script/jquery-1.8.2.min.js"></script>
+    <script src="~/script/layer/layer.js"></script>
+    <script src="~/layui/layui.js"></script>
+    <script src="~/script/Common/btframe.js"></script>
+    <script src="~/script/Common/admin.js"></script>
+</body>
+</html>

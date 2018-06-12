@@ -1,0 +1,92 @@
+﻿@using CML.SqlDoc.Trans.Dto;
+@using System.Collections.Generic;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<TableStructureDto>
+
+<div class="layui-form">
+    <div class="layui-tab layui-tab-brief" lay-filter="user">
+        <ul class="layui-tab-title"> <li class="layui-this">数据结构文档</li>  </ul>
+        <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 5px 0;">
+            <div class="layui-tab-item layui-show">
+                <form action="" class="layui-form">
+                    <div class="layui-form-item" style="margin: 10px 0 0;">
+                        <label class="layui-form-label" style="width: auto; padding-right: 5px;">筛选：</label>
+                        <div class="layui-input-inline"> <input type="text" name="tbname" id="tbname" class="layui-input" value=""> </div>
+                    </div>
+                </form>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <table class="layui-table" data-tbname="@item.TableName@item.Description">
+                            <colgroup>
+                                <col width="150">
+                                <col width="150">
+                                <col width="200">
+                                <col width="50">
+                                <col>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th colspan="4" class="tb-name">@item.TableName [@item.Description]</th>
+                                </tr>
+                            </thead>
+                            <tbody class="layui-hide">
+                                @foreach (var col in item.ColumnList)
+                                {
+                                    <tr>
+                                        <td>@col.ColumnName</td>
+                                        <td>
+                                            @if (col.DataType == "varchar")
+                                            {
+                                                @:@col.DataType.ToString()【@col.MaxLength】
+                                            }
+                                            else
+                                            {
+                                                @col.DataType@((col.IsNullable == 1) ? "?" : "")
+                                            }
+                                        </td>
+                                        <td>@col.ColumnDescription </td>
+                                        <td>@((col.ColumnDefaultValue != "") ? col.ColumnDefaultValue : "")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                }
+            </div>
+
+        </div>
+
+    </div>
+</div>
+@section Script{
+    <script type="text/javascript">
+        $(function () {
+            $(".tb-name").on("click", function () {
+                var tbody = $(this).parent().parent().parent().find("tbody");
+                if (tbody.hasClass("layui-hide"))
+                    tbody.removeClass("layui-hide");
+                else
+                    tbody.addClass("layui-hide");
+            });
+
+            $("#tbname").on("keyup", function () {
+                var keyword = Trim($(this).val()).toLowerCase();
+                $(".layui-table").removeClass("layui-hide");
+                $(".layui-table").each(function (index, item) {
+                    var tbname = $(this).data("tbname").toLowerCase();
+                    if (keyword != "" && tbname.indexOf(keyword) < 0) {
+                        $(this).addClass("layui-hide");
+                    }
+                })
+            })
+        })
+
+        function Trim(str) {
+            return str.replace(/(^\s*)|(\s*$)/g, "");
+        }
+    </script>
+}

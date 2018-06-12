@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CML.DataAccess" Version="1.0.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CML.SqlDoc.Domain\CML.SqlDoc.Domain.csproj" />
+    <ProjectReference Include="..\CML.SqlDoc.Trans\CML.SqlDoc.Trans.csproj" />
+  </ItemGroup>
+
+</Project>
