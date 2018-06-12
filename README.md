@@ -45,8 +45,6 @@ CML.SqlDoc 是基于netcore2.1开发的数据库表结构文档查看器，通�
 
 * 基于.Net Core 2.1开发；
 
-* 前后端完全分离。`我们不限制规则，只用主流的技术构建强大的框架`；
-
 * 后端采用 asp.net mvc core 2.1  + Dapper + autofac 
 
 ## 补充
