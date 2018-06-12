@@ -4,3 +4,11 @@
 /.vs/CML.SqlDoc/v15/Server/sqlite3/storage.ide
 /.vs/CML.SqlDoc/v15/Server/sqlite3/storage.ide-shm
 /.vs/config/applicationhost.config
+/CML.SqlDoc.Domain/bin
+/CML.SqlDoc.Domain/obj
+/CML.SqlDoc.Repository/obj
+/CML.SqlDoc.Repository/bin
+/CML.SqlDoc.Trans/obj
+/CML.SqlDoc.Trans/bin
+/CML.SqlDoc.Web/obj
+/CML.SqlDoc.Web/bin
